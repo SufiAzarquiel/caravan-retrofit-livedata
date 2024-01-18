@@ -40,5 +40,13 @@ data class Respuesta (
     val comunidades: List<Comunidad>,
     var provincias: List<Provincia>,
     var municipios: List<Municipio>,
-    var lieux: List<Lugar>
+    var lieux: List<Lugar>,
+    var avg: String,
+    var punto: Punto
+)
+
+data class Punto (
+    var usuario: Int,
+    var lugar: Int,
+    var puntos: Int
 )

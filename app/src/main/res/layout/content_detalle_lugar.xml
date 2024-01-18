@@ -18,16 +18,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvDetalleLugar"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDetalleLugar">
+    <HorizontalScrollView
+        android:id="@+id/hsvDetalleLugar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBarAvg">
 
-        </androidx.recyclerview.widget.RecyclerView>
+        <LinearLayout
+            android:id="@+id/llhDetalleLugar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"></LinearLayout>
+    </HorizontalScrollView>
+
+    <RatingBar
+        android:numStars="5"
+        android:stepSize="1"
+        android:id="@+id/ratingBarUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <RatingBar
+        android:numStars="5"
+        android:isIndicator="true"
+        android:id="@+id/ratingBarAvg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetalleLugar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

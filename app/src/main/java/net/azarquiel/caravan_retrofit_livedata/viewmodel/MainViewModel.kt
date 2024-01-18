@@ -10,6 +10,7 @@ import net.azarquiel.caravan_retrofit_livedata.model.Comunidad
 import net.azarquiel.caravan_retrofit_livedata.model.Lugar
 import net.azarquiel.caravan_retrofit_livedata.model.Municipio
 import net.azarquiel.caravan_retrofit_livedata.model.Provincia
+import net.azarquiel.caravan_retrofit_livedata.model.Punto
 
 class MainViewModel: ViewModel() {
     private var repository: MainRepository = MainRepository()
@@ -44,5 +45,21 @@ class MainViewModel: ViewModel() {
             lugares.value = repository.getLugarByLatitudLongitud(latitud, longitud)
         }
         return lugares
+    }
+
+    fun getAvgStarsByIdLugar(idlugar: Int): MutableLiveData<String> {
+        val avg = MutableLiveData<String>()
+        GlobalScope.launch(Main) {
+            avg.value = repository.getAvgStarsByIdLugar(idlugar)
+        }
+        return avg
+    }
+
+    fun addPuntosByIdLugar(idlugar: Int, punto: Punto): MutableLiveData<Punto> {
+        val puntoLocal = MutableLiveData<Punto>()
+        GlobalScope.launch(Main) {
+            puntoLocal.value = repository.addPuntosByIdLugar(idlugar, punto)
+        }
+        return puntoLocal
     }
 }

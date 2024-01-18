@@ -4,6 +4,7 @@ import net.azarquiel.caravan_retrofit_livedata.model.Comunidad
 import net.azarquiel.caravan_retrofit_livedata.model.Lugar
 import net.azarquiel.caravan_retrofit_livedata.model.Municipio
 import net.azarquiel.caravan_retrofit_livedata.model.Provincia
+import net.azarquiel.caravan_retrofit_livedata.model.Punto
 
 class MainRepository() {
     val service = WebAccess.caravanService
@@ -38,5 +39,22 @@ class MainRepository() {
             return webResponse.body()!!.lieux
         }
         return emptyList()
+    }
+
+    suspend fun getAvgStarsByIdLugar(idlugar: Int): String {
+        val webResponse = service.getAvgStarsByIdLugar(idlugar).await()
+        if (webResponse.isSuccessful) {
+            return webResponse.body()!!.avg
+        }
+        return "0"
+    }
+
+    suspend fun addPuntosByIdLugar(idlugar: Int, punto: Punto): Punto? {
+        val webResponse = service.addPuntosByIdLugar(idlugar, punto).await()
+        var puntoResponse: Punto? = null
+        if (webResponse.isSuccessful) {
+            puntoResponse = webResponse.body()!!.punto
+        }
+        return puntoResponse
     }
 }

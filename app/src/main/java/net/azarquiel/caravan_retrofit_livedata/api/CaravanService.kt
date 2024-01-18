@@ -1,9 +1,12 @@
 package net.azarquiel.caravan_retrofit_livedata.api
 
 import kotlinx.coroutines.Deferred
+import net.azarquiel.caravan_retrofit_livedata.model.Punto
 import net.azarquiel.caravan_retrofit_livedata.model.Respuesta
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -25,4 +28,18 @@ interface CaravanService {
     fun getLugarByLatitudLongitud(
         @Query("latitud") latitud: String,
         @Query("longitud") longitud: String): Deferred<Response<Respuesta>>
+
+    // Get from http://www.ies-azarquiel.es/paco/apicaravan/lugar/{idlugar}/avgpuntos
+    @GET("lugar/{idlugar}/avgpuntos")
+    fun getAvgStarsByIdLugar(@Path("idlugar") idlugar: Int): Deferred<Response<Respuesta>>
+
+    // Post to /lugar/{idlugar}/puntos with json -> object:
+    //    {
+    //      "usuario": "1",
+    //      "lugar": "613",
+    //      "puntos": "5"
+    //    }
+    @POST("lugar/{idlugar}/puntos")
+    fun addPuntosByIdLugar(@Path("idlugar") idlugar: Int, @Body puntos: Punto): Deferred<Response<Respuesta>>
+
 }
