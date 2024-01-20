@@ -12,12 +12,14 @@ import net.azarquiel.caravan_retrofit_livedata.R
 import net.azarquiel.caravan_retrofit_livedata.adapter.AdapterProvincias
 import net.azarquiel.caravan_retrofit_livedata.model.Comunidad
 import net.azarquiel.caravan_retrofit_livedata.model.Provincia
+import net.azarquiel.caravan_retrofit_livedata.model.Usuario
 import net.azarquiel.caravan_retrofit_livedata.viewmodel.MainViewModel
 
 class ProvinciaActivity : AppCompatActivity() {
     private lateinit var adapter: AdapterProvincias
     private lateinit var rvProvincias: RecyclerView
     private lateinit var comunidad: Comunidad
+    private lateinit var user: Usuario
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +28,7 @@ class ProvinciaActivity : AppCompatActivity() {
         comunidad = intent.getSerializableExtra("comunidad") as Comunidad
 
         initRV()
+        user = intent.getSerializableExtra("user") as Usuario
 
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.getDataProvinciaByComunidad(comunidad.id).observe(this, Observer {
@@ -45,6 +48,7 @@ class ProvinciaActivity : AppCompatActivity() {
 
         val intent = Intent(this, MunicipiosActivity::class.java)
         intent.putExtra("provincia", provincia)
+        intent.putExtra("user", user)
         startActivity(intent)
     }
 }

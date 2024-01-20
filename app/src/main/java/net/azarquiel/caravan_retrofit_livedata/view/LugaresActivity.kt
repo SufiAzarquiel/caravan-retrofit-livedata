@@ -13,12 +13,14 @@ import net.azarquiel.caravan_retrofit_livedata.adapter.AdapterLugares
 import net.azarquiel.caravan_retrofit_livedata.model.Comunidad
 import net.azarquiel.caravan_retrofit_livedata.model.Municipio
 import net.azarquiel.caravan_retrofit_livedata.model.Lugar
+import net.azarquiel.caravan_retrofit_livedata.model.Usuario
 import net.azarquiel.caravan_retrofit_livedata.viewmodel.MainViewModel
 
 class LugaresActivity : AppCompatActivity() {
     private lateinit var adapter: AdapterLugares
     private lateinit var rvLugares: RecyclerView
     private lateinit var municipio: Municipio
+    private lateinit var user: Usuario
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +29,7 @@ class LugaresActivity : AppCompatActivity() {
         municipio = intent.getSerializableExtra("municipio") as Municipio
 
         initRV()
+        user = intent.getSerializableExtra("user") as Usuario
 
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.getLugarByLatitudLongitud(municipio.latitud, municipio.longitud).observe(this, Observer {
@@ -46,6 +49,7 @@ class LugaresActivity : AppCompatActivity() {
 
         val intent = Intent(this, DetalleLugarActivity::class.java)
         intent.putExtra("lugar", lugar)
+        intent.putExtra("user", user)
         startActivity(intent)
     }
 }

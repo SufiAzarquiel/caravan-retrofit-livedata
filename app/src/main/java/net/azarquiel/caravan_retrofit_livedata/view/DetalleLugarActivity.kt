@@ -15,6 +15,7 @@ import net.azarquiel.caravan_retrofit_livedata.databinding.ActivityDetalleLugarB
 import net.azarquiel.caravan_retrofit_livedata.model.Foto
 import net.azarquiel.caravan_retrofit_livedata.model.Lugar
 import net.azarquiel.caravan_retrofit_livedata.model.Punto
+import net.azarquiel.caravan_retrofit_livedata.model.Usuario
 import net.azarquiel.caravan_retrofit_livedata.viewmodel.MainViewModel
 
 class DetalleLugarActivity : AppCompatActivity() {
@@ -33,6 +34,7 @@ class DetalleLugarActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
+        var user = intent.getSerializableExtra("user") as Usuario
         lugar = intent.getSerializableExtra("lugar") as Lugar
         setTitle(lugar.titre)
 

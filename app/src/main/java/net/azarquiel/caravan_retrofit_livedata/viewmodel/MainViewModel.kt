@@ -11,6 +11,7 @@ import net.azarquiel.caravan_retrofit_livedata.model.Lugar
 import net.azarquiel.caravan_retrofit_livedata.model.Municipio
 import net.azarquiel.caravan_retrofit_livedata.model.Provincia
 import net.azarquiel.caravan_retrofit_livedata.model.Punto
+import net.azarquiel.caravan_retrofit_livedata.model.Usuario
 
 class MainViewModel: ViewModel() {
     private var repository: MainRepository = MainRepository()
@@ -61,5 +62,13 @@ class MainViewModel: ViewModel() {
             puntoLocal.value = repository.addPuntosByIdLugar(idlugar, punto)
         }
         return puntoLocal
+    }
+
+    fun addUser(usuario: Usuario): MutableLiveData<Usuario> {
+        val usuarioLocal = MutableLiveData<Usuario>()
+        GlobalScope.launch(Main) {
+            usuarioLocal.value = repository.addUser(usuario)
+        }
+        return usuarioLocal
     }
 }

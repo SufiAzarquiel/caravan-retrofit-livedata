@@ -20,12 +20,14 @@ import net.azarquiel.caravan_retrofit_livedata.adapter.AdapterMunicipios
 import net.azarquiel.caravan_retrofit_livedata.databinding.ActivityMunicipiosBinding
 import net.azarquiel.caravan_retrofit_livedata.model.Municipio
 import net.azarquiel.caravan_retrofit_livedata.model.Provincia
+import net.azarquiel.caravan_retrofit_livedata.model.Usuario
 import net.azarquiel.caravan_retrofit_livedata.viewmodel.MainViewModel
 
 class MunicipiosActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private lateinit var municipios: List<Municipio>
     private lateinit var adapterMunicipios: AdapterMunicipios
     private lateinit var binding: ActivityMunicipiosBinding
+    private lateinit var user: Usuario
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,7 @@ class MunicipiosActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         var provincia = intent.getSerializableExtra("provincia") as Provincia
 
         initRV()
+        user = intent.getSerializableExtra("user") as Usuario
 
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.getDataMunicipioByProvincia(provincia.id).observe(this, Observer {
@@ -88,6 +91,7 @@ class MunicipiosActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         val intent = Intent(this, LugaresActivity::class.java)
         intent.putExtra("municipio", municipio)
+        intent.putExtra("user", user)
         startActivity(intent)
     }
 }

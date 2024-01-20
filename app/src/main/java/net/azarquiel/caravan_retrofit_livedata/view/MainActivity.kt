@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import net.azarquiel.caravan_retrofit_livedata.R
 import net.azarquiel.caravan_retrofit_livedata.adapter.AdapterComunidades
 import net.azarquiel.caravan_retrofit_livedata.model.Comunidad
+import net.azarquiel.caravan_retrofit_livedata.model.Usuario
 import net.azarquiel.caravan_retrofit_livedata.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var user: Usuario
     private lateinit var adapter: AdapterComunidades
     private lateinit var rvComunidades: RecyclerView
 
@@ -23,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initRV()
+        user = intent.getSerializableExtra("user") as Usuario
 
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.getDataComunidades().observe(this, Observer {
@@ -42,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         val intent = Intent(this, ProvinciaActivity::class.java)
         intent.putExtra("comunidad", comunidad)
+        intent.putExtra("user", user)
         startActivity(intent)
     }
 }

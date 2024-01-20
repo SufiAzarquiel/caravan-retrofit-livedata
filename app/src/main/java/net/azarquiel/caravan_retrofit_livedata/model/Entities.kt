@@ -42,7 +42,8 @@ data class Respuesta (
     var municipios: List<Municipio>,
     var lieux: List<Lugar>,
     var avg: String,
-    var punto: Punto
+    var punto: Punto,
+    val usuario: Usuario
 )
 
 data class Punto (
@@ -50,3 +51,8 @@ data class Punto (
     var lugar: Int,
     var puntos: Int
 )
+
+data class Usuario (
+    var nick: String,
+    var pass: String
+): Serializable

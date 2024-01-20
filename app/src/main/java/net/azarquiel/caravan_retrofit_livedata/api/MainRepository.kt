@@ -5,6 +5,7 @@ import net.azarquiel.caravan_retrofit_livedata.model.Lugar
 import net.azarquiel.caravan_retrofit_livedata.model.Municipio
 import net.azarquiel.caravan_retrofit_livedata.model.Provincia
 import net.azarquiel.caravan_retrofit_livedata.model.Punto
+import net.azarquiel.caravan_retrofit_livedata.model.Usuario
 
 class MainRepository() {
     val service = WebAccess.caravanService
@@ -56,5 +57,14 @@ class MainRepository() {
             puntoResponse = webResponse.body()!!.punto
         }
         return puntoResponse
+    }
+
+    suspend fun addUser(usuario: Usuario): Usuario? {
+        val webResponse = service.addUser(usuario).await()
+        var usuarioResponse: Usuario? = null
+        if (webResponse.isSuccessful) {
+            usuarioResponse = webResponse.body()!!.usuario
+        }
+        return usuarioResponse
     }
 }
