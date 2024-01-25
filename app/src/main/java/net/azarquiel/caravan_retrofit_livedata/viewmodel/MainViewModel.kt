@@ -71,4 +71,12 @@ class MainViewModel: ViewModel() {
         }
         return usuarioLocal
     }
+
+    fun getDataUser(nick: String, pass: String): MutableLiveData<Usuario?> {
+        val usuarioLocal = MutableLiveData<Usuario?>()
+        GlobalScope.launch(Main) {
+            usuarioLocal.value = repository.getDataUser(nick, pass)
+        }
+        return usuarioLocal
+    }
 }

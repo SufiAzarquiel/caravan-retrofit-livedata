@@ -50,4 +50,9 @@ interface CaravanService {
     //    }
     @POST("usuario")
     fun addUser(@Body usuario: Usuario): Deferred<Response<Respuesta>>
+
+    // Get user
+    @GET("usuario")
+    fun getDataUser(@Query("nick") nick: String,
+        @Query("pass") pass: String): Deferred<Response<Respuesta>>
 }

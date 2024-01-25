@@ -67,4 +67,13 @@ class MainRepository() {
         }
         return usuarioResponse
     }
+
+    suspend fun getDataUser(nick: String, pass: String): Usuario? {
+        val webResponse = service.getDataUser(nick, pass).await()
+        var usuarioResponse: Usuario? = null
+        if (webResponse.isSuccessful) {
+            usuarioResponse = webResponse.body()!!.usuario
+        }
+        return usuarioResponse
+    }
 }
